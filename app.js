@@ -14,7 +14,8 @@ class App extends React.Component {
       [e.target.getAttribute("name")]: e.target.value,
     });
 
-    if(e.target.getAttribute("name") === "newsletter"){
+    if(e.target.type === "checkbox"){
+      console.log(e.target.type)
       this.setState({
         newsletter: e.target.checked
       })
