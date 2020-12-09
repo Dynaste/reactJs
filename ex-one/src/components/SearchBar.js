@@ -11,12 +11,13 @@ const Searchbar = ({
     <>
       <input
         type="text"
+        className="search-input"
         value={searchContent}
         onChange={handleChange}
         placeholder="Insert github pseudo"
       />
       <div style={{ display: "flex" }}>
-        <label style={{ fontSize: 12 }}>Only owner's repository</label>
+        <label style={{ fontSize: 14 }}>Only owner's repository</label>
         <input type="checkbox" name="Only owner's repository" onChange={handleCheck}/>
       </div>
 
