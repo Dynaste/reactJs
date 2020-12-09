@@ -1,4 +1,6 @@
 body {
+  background-color: rgb(47, 47, 47);
+  color: white;
   margin: 0;
   min-width: 100vw;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,6 +8,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a{
+  color: white;
+  outline: none;
+  text-decoration: none;
 }
 
 #app {
@@ -23,5 +31,5 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 25px;
+  margin-top: 10px;
 }
