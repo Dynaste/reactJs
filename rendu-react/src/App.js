@@ -106,16 +106,14 @@ const App = () => {
 
   const searchResult = async () => {
     try {
-      setItemSearch(null);
+      await setItemSearch(null);
       let result = [];
       items.forEach((el) => {
         if (el.title.toLowerCase().includes(searchContent.toLowerCase())) {
           result.push(el);
         }
       });
-      console.log(result);
       if (result.length > 0) {
-        console.log(result);
         await setItems(result);
       } else {
         await setItemSearch("no result");
@@ -147,7 +145,7 @@ const App = () => {
         ["Electronics"]: false,
         ["Men clothing"]: false,
         ["Jewelery"]: false,
-      })
+      });
     }
   }, [searchContent]);
 

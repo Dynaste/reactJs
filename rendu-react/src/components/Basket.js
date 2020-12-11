@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import ClosePic from "./cancel.png"
 
 const Basket = ({ basketItem, setBasketItem, isOpen, setIsOpen }) => {
   const [cartTotal, setCartTotal] = useState(0);
-  const [qtyChange, setQtyChange] = useState(null);
 
   const openBasket = () => {
     setIsOpen(!isOpen);
@@ -45,7 +45,7 @@ const Basket = ({ basketItem, setBasketItem, isOpen, setIsOpen }) => {
   return (
     <div className="basket-large-container">
       <div className="basket-container">
-        <button onClick={openBasket}>close</button>
+        <img className="cross-pic" src={ClosePic} onClick={openBasket} />
         {basketItem.length > 0 &&
           basketItem.map((data, i) => (
             <div className="basket-item" key={i}>

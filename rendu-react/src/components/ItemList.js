@@ -56,7 +56,7 @@ const ItemList = ({ items, basketItem, setBasketItem }) => {
   };
   return (
     <div className="item-list-container">
-      {items && items.length > 1 && (
+      {items &&  (
         <>
           {items.map((data, i) => (
             <div className="item-container" key={i}>
@@ -75,21 +75,6 @@ const ItemList = ({ items, basketItem, setBasketItem }) => {
             </div>
           ))}
         </>
-      )}
-      {items && items.length === 0 && (
-        <div className="item-container">
-          <img className="item-picture" src={items[0].image} />
-          <h5>{items[0].title}</h5>
-          <div className="button-item">
-            <select name={items[0].id}>
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-            </select>
-            <button onClick={() => addToBasket(items[0])}>Add to basket</button>
-          </div>
-        </div>
       )}
     </div>
   );
