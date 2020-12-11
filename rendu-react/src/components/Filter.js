@@ -7,7 +7,8 @@ const Filter = ({
   womenClothes,
   jewelery,
   electronics,
-  setSearchContent
+  setSearchContent,
+  searchContent
 }) => {
   const handleClick = (e) => {
     setTags({
@@ -17,23 +18,27 @@ const Filter = ({
   };
 
   const handleChange = (e) => {
-      setSearchContent(e.target.value)
-  }
+    setSearchContent(e.target.value);
+  };
   return (
     <div className="filter-container">
-        <div>
-            <input className="search-bar" type="text" onChange={handleChange}/>
-        </div>
+      <input
+        className="search-bar"
+        type="text"
+        value={searchContent}
+        onChange={handleChange}
+        placeholder="Search one item"
+      />
       {Object.keys(tags).map((data, i) => (
         <div className="tags-item" key={i}>
-          {data === "Men clothes" && (
+          {data === "Men clothing" && (
             <span>
               {"("}
               {menClothes.length}
               {")"}
             </span>
           )}
-          {data === "Women clothes" && (
+          {data === "Women clothing" && (
             <span>
               {"("}
               {womenClothes.length}
@@ -55,7 +60,7 @@ const Filter = ({
             </span>
           )}
           <h4>{data}</h4>
-          <input type="checkbox" name={data} onClick={handleClick} />
+          <input type="checkbox" name={data} onChange={handleClick} checked={tags[data]} />
         </div>
       ))}
     </div>

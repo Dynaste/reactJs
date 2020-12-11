@@ -5,20 +5,25 @@ import LoadingPic from "./loading.svg";
 import Header from "./components/Header";
 import ItemList from "./components/ItemList";
 import Filter from "./components/Filter";
+import Basket from "./components/Basket";
 
 const App = () => {
+  const [defaultItems, setDefaultItems] = useState(null);
   const [items, setItems] = useState(null);
+  const [itemSearch, setItemSearch] = useState(null);
   const [menClothes, setMenClothes] = useState(null);
   const [jewelery, setJewelery] = useState(null);
   const [electronics, setElectronics] = useState(null);
   const [womenClothes, setWomenClothes] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false)
 
-  const [searchContent, setSearchContent] = useState(null);
+  const [basketItem, setBasketItem] = useState([]);
+  const [searchContent, setSearchContent] = useState("");
   const [tags, setTags] = useState({
-    ["Women clothes"]: false,
+    ["Women clothing"]: false,
     ["Electronics"]: false,
-    ["Men clothes"]: false,
+    ["Men clothing"]: false,
     ["Jewelery"]: false,
   });
 
@@ -45,7 +50,8 @@ const App = () => {
         }
       });
 
-      await setItems(result);
+      await setItems(result.data);
+      await setDefaultItems(result.data);
       await setMenClothes(menArr);
       await setWomenClothes(womenArr);
       await setJewelery(jewelArr);
@@ -57,9 +63,87 @@ const App = () => {
     }
   };
 
+  const verificationTags = () => {
+    for (const el in tags) {
+      if (tags[el] === true) {
+        return true;
+      }
+    }
+  };
+
+  const itemToDisplay = async () => {
+    try {
+      setIsLoading(true);
+      await setSearchContent("");
+      let newArr = [];
+      console.log("start", newArr);
+
+      if (tags["Women clothing"]) {
+        newArr = [...newArr, ...womenClothes];
+        console.log("women", newArr);
+      }
+      if (tags["Men clothing"]) {
+        newArr = [...newArr, ...menClothes];
+        console.log("men", newArr);
+      }
+      if (tags["Jewelery"]) {
+        newArr = [...newArr, ...jewelery];
+        console.log("jewelery", newArr);
+      }
+      if (tags["Electronics"]) {
+        newArr = [...newArr, ...electronics];
+        console.log("electronics", newArr);
+      }
+      console.log("end", newArr);
+      setItems(newArr);
+
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
+  const searchResult = async () => {
+    try {
+      setItemSearch(null);
+      let result = [];
+      items.forEach((el) => {
+        if (el.title.toLowerCase().includes(searchContent.toLowerCase())) {
+          result.push(el);
+        }
+      });
+      console.log(result);
+      if (result.length > 0) {
+        console.log(result);
+        await setItems(result);
+      } else {
+        await setItemSearch("no result");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getItems();
   }, []);
+
+  useEffect(() => {
+    if (verificationTags()) {
+      itemToDisplay();
+    } else {
+      setItems(defaultItems);
+    }
+  }, [tags]);
+
+  useEffect(() => {
+    if (searchContent) {
+      searchResult();
+    } else {
+      setItems(defaultItems);
+    }
+  }, [searchContent]);
 
   return (
     <div id="app">
@@ -68,9 +152,13 @@ const App = () => {
           <img src={LoadingPic} />
         </div>
       )}
+      {
+          isOpen && 
+          <Basket basketItem={basketItem} setBasketItem={setBasketItem}/>
+      }
       {!isLoading && (
         <>
-          <Header />
+          <Header isOpen={isOpen} setIsOpen={setIsOpen} basketItem={basketItem}/>
           <div className="content-container">
             <Filter
               tags={tags}
@@ -78,10 +166,19 @@ const App = () => {
               menClothes={menClothes}
               womenClothes={womenClothes}
               jewelery={jewelery}
-              electronics={electronics}              
+              electronics={electronics}
               setSearchContent={setSearchContent}
+              searchContent={searchContent}
             />
-            <ItemList items={items} />
+            {!itemSearch && (
+              <ItemList
+                items={items}
+                basketItem={basketItem}
+                setBasketItem={setBasketItem}
+              />
+            )}
+
+            {searchContent && itemSearch && <h2>No result</h2>}
           </div>
         </>
       )}
