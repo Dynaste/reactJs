@@ -3,14 +3,19 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 100vw;
+  width: 100vw;
+  max-width: 2600px;
   min-height: 100vh;
   background: rgb(243, 243, 243);
+  margin: auto;
+ 
 }
 
 #app {
-  min-width: 100vw;
+  margin: auto;
+  width: 100%;
   min-height: 100vh;
+  position: relative;
 }
 
 * {
@@ -74,6 +79,7 @@ body {
   border-radius: 3px;
   width: 20%;
   height: fit-content;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .tags-item {
@@ -110,6 +116,13 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 300px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.item-container h5 {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #5e6fa3;
 }
 
 .item-picture {
@@ -131,6 +144,58 @@ body {
 .button-item {
   margin-top: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.basket-large-container {
+  width: 100vw;
+  min-height: 100%;
+  height: fit-content;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: rgba(29, 29, 29, 0.856);
+  z-index: 9999;
+}
+
+.basket-container {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  padding: 45px;
+  width: fit-content;
+  height: fit-content;
+  background: white;
+  border-radius: 3px;
+}
+
+.basket-item {
+  margin: 10px;
+  padding: 5px;
+  border-bottom: 2px solid #5e6fa3;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+.basket-item input, .basket-item p {
+  margin: 5px;
+}
+
+.basket-item button {
+  background: rgb(168, 24, 24);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 3px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.basket-item img {
+  width: 125px;
+  height: 125px;
 }

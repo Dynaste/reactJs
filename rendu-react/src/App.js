@@ -16,7 +16,7 @@ const App = () => {
   const [electronics, setElectronics] = useState(null);
   const [womenClothes, setWomenClothes] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const [basketItem, setBasketItem] = useState([]);
   const [searchContent, setSearchContent] = useState("");
@@ -142,6 +142,12 @@ const App = () => {
       searchResult();
     } else {
       setItems(defaultItems);
+      setTags({
+        ["Women clothing"]: false,
+        ["Electronics"]: false,
+        ["Men clothing"]: false,
+        ["Jewelery"]: false,
+      })
     }
   }, [searchContent]);
 
@@ -152,13 +158,21 @@ const App = () => {
           <img src={LoadingPic} />
         </div>
       )}
-      {
-          isOpen && 
-          <Basket basketItem={basketItem} setBasketItem={setBasketItem}/>
-      }
+      {isOpen && (
+        <Basket
+          basketItem={basketItem}
+          setBasketItem={setBasketItem}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      )}
       {!isLoading && (
         <>
-          <Header isOpen={isOpen} setIsOpen={setIsOpen} basketItem={basketItem}/>
+          <Header
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            basketItem={basketItem}
+          />
           <div className="content-container">
             <Filter
               tags={tags}

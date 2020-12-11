@@ -21,16 +21,14 @@ const ItemList = ({ items, basketItem, setBasketItem }) => {
       } else {
         const isAlrdyIn = basketItem.findIndex((item) => item.id === data.id);
         console.log(isAlrdyIn);
-        if(isAlrdyIn != -1){
-            const newArr = [...basketItem];
-            newArr[isAlrdyIn].qty = newArr[isAlrdyIn].qty + dataToPush.qty
-            console.log(newArr);
-            setBasketItem(newArr)
-
-        }else {
-            setBasketItem([...basketItem, dataToPush]);
+        if (isAlrdyIn != -1) {
+          const newArr = [...basketItem];
+          newArr[isAlrdyIn].qty = newArr[isAlrdyIn].qty + dataToPush.qty;
+          console.log(newArr);
+          setBasketItem(newArr);
+        } else {
+          setBasketItem([...basketItem, dataToPush]);
         }
-        
       }
     } else {
       const dataToPush = {
@@ -45,16 +43,14 @@ const ItemList = ({ items, basketItem, setBasketItem }) => {
       } else {
         const isAlrdyIn = basketItem.findIndex((item) => item.id === data.id);
         console.log(isAlrdyIn);
-        if(isAlrdyIn != -1){
-            const newArr = [...basketItem];
-            newArr[isAlrdyIn].qty = newArr[isAlrdyIn].qty + dataToPush.qty
-            console.log(newArr);
-            setBasketItem(newArr)
-
-        }else {
-            setBasketItem([...basketItem, dataToPush]);
+        if (isAlrdyIn != -1) {
+          const newArr = [...basketItem];
+          newArr[isAlrdyIn].qty = newArr[isAlrdyIn].qty + dataToPush.qty;
+          console.log(newArr);
+          setBasketItem(newArr);
+        } else {
+          setBasketItem([...basketItem, dataToPush]);
         }
-        
       }
     }
   };
